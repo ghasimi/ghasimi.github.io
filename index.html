@@ -43,7 +43,7 @@
                 top: 0;
                 padding: 10px;
                 margin-top: 12vh;   
-                z-index: 20;  
+                z-index: 5;  
             }    
             
             .name {
@@ -57,9 +57,23 @@
             }
 
             #stat {
-                margin: 20px;
-                font-size: 1.1em;
-                font-weight: 300;
+                position: absolute;
+                bottom: 100px;
+                left: 0;
+                text-align: left;
+                padding: 20px;
+                font-size: .9em;
+                background-image: linear-gradient(90deg, white,  rgba(255,255,255,0));
+            }
+
+            #stat label {
+                padding: 0 5px 0 0;
+                opacity: .7;
+            }
+            #stat span {
+                padding: 0 5px 0 0;
+                font-weight: 500;
+                opacity: .9;
             }
 
             .d-none {
@@ -75,17 +89,16 @@
 
         <div id="intro">
             <div class="name">David Ghasimi</div>
-            <div class="headline">Analytics Designer and Developer</div>
-            <div id="stat">                    
-                <div class="d-none">
-                    x <span id="stat-mouseX"></span>
-                    , y <span id="stat-mouseY"></span>
-                </div>            
-                <div id="stat-count"></div>
-                <div id="stat-totalTime"></div>
-                <div id="stat-totalDistance"></div>
-            </div>         
+            <div class="headline">Analytics Designer and Developer</div>      
         </div>
+
+        <div id="stat">                                
+            <div><label>X</label><span id="stat-mouseX"></span></div>    
+            <div><label>Y</label><span id="stat-mouseY"></span></div>    
+            <div><label>Records</label><span id="stat-count"></span></div>
+            <div class="d-none"><label>Time</label><span id="stat-totalTime"></span></div>
+            <div><label>Pixels traveled</label><span id="stat-totalDistance"></span></div>
+        </div>           
 
 
         <script>
@@ -144,7 +157,7 @@
 
             function updatePos(e) {
                 if (pos.length > 20 && Date.now() - startTime > 3*1000) {
-                    return
+                    //return
                 }
                 let x = e.pageX + ((-.5 + Math.random()) * viewDim.w * .02)
                 let y = e.pageY + ((-.5 + Math.random()) * viewDim.h * .02)
@@ -166,29 +179,35 @@
 
             function updatePlot() {
                 let n = pos.length      
-                let posPlotMemory = 50
+                let posPlotMemory = n
                 let pos2 = pos.filter((p,i)=>i>n - posPlotMemory)          
                 let x = pos2.map(e=> e.x)
                 let y = pos2.map(e=> viewDim.h - e.y)
+
                 let tracePoints = {
                     name: 'points',
                     type: 'scatter',
                     x,
                     y,
-                    mode: 'markers',
+                    mode: 'markers+lines',
                     marker: {
-                        size: 4,
-                        color:'#777',
-                        opacity: .3,
+                        size: 10,
+                        color:'rgba(255,255,255,.5)',
+                        opacity: .6,
+                        line: {
+                            color: '#999',
+                            width:0,
+                        }
                     },
                     line: {
-                        width:.3,
-                        color: 'red',
-                        opacity: .3,
-                        dash: 'dot',
-                        shape: 'spline',
+                        width:0,
+                        color: '#eee',
+                        opacity: 0,
+                        dash: 'solid',
+                        shape: 'vhv',
                     }
                 }
+
                 let traceDensity = {
                         name: 'density',
                         type: 'histogram2dcontour',                        
@@ -243,15 +262,20 @@
                         showgrid:false,
                         range: [0, viewDim.w],
                         zeroline: false,
-                        visible:false,
+                        //visible:false,
                         fixedrange: true,
+                        position: .1,
+                        tickfont: {
+                            //color:'rgb(0,150,220)',
+                            size: 10,
+                        },                          
                     },
                     yaxis: {
                         showgrid:false,
                         range: [0 , viewDim.h],
-                        zeroline: false,
+                        zeroline: {ax: 100,},
                         visible:false,
-                        fixedrange: true,
+                        fixedrange: true,                                              
                     },    
                     margin: {
                         l:0,
@@ -276,14 +300,14 @@
                 document.getElementById('stat-mouseY').innerText = Math.round(mousePos.y)
 
                 countPoints = pos.length
-                document.getElementById('stat-count').innerText = countPoints + ' points'
+                document.getElementById('stat-count').innerText = countPoints
                 totalDistance = pos.map((p,i)=>(
                         i>=1
                         ? distance(pos[i].x - pos[i-1].x, pos[i].y - pos[i-1].y)
                         : 0 
                     ))
                     .reduce((tot,x)=>(tot+x))
-                document.getElementById('stat-totalDistance').innerText = Math.round(totalDistance) + ' pixels traveled'
+                document.getElementById('stat-totalDistance').innerText = Math.round(totalDistance)
             }
         </script>
     </body>
