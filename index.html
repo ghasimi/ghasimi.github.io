@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ghasimi's Page</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>  
+
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 300;
+                color: rgb(60, 60, 60);
+                margin: 0;
+                padding: 0;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                align-items: center;                
+            }
+
+            #canvas {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                margin:0;
+                padding: 0;
+                background-color: rgba(255, 255, 255, .0);
+                z-index: 10;
+            }
+
+            div.plotly-notifier {
+                visibility: hidden;
+            } 
+
+            #intro {
+                position: absolute;
+                display:inline-block;
+                top: 0;
+                padding: 10px;
+                margin-top: 12vh;   
+                z-index: 20;  
+            }    
+            
+            .name {
+                font-size: 3em;
+                font-weight: 500;
+            }
+
+            .headline {
+                font-size: 1.2em;
+                font-weight: 500;
+            }
+
+            #stat {
+                margin: 20px;
+                font-size: 1.1em;
+                font-weight: 300;
+            }
+
+            .d-none {
+                display: none;
+            }
+
+      </style>    
+    </head>
+    <body>
+        <canvas id="canvas" ></canvas>
+
+        <div  id="plot"></div>
+
+        <div id="intro">
+            <div class="name">David Ghasimi</div>
+            <div class="headline">Analytics Designer and Developer</div>
+            <div id="stat">                    
+                <div class="d-none">
+                    x <span id="stat-mouseX"></span>
+                    , y <span id="stat-mouseY"></span>
+                </div>            
+                <div id="stat-count"></div>
+                <div id="stat-totalTime"></div>
+                <div id="stat-totalDistance"></div>
+            </div>         
+        </div>
+
+
+        <script>
+            let mousePos = {}
+            let pos = []
+            let data = []
+            let viewDim = {} 
+            let viewMatrix = []
+            let startTime = Date.now()
+            let totalTime = 0
+            let totalDistance = 0
+            let countPoints = 0
+            let last = Date.now()
+            let initialRandomTime = 0
+            let div_plot = document.getElementById('plot')
+
+            updateViewDim()
+
+            window.addEventListener('resize', e=>{
+                updateViewDim()
+            })
+            
+            function updateViewDim() {
+                let w = Math.min(screen.width, window.innerWidth)
+                let h = Math.min(screen.height, window.innerHeight)
+                viewDim = {w, h}
+
+                Array(10).fill(0).map(e=> {
+                    pos.push({
+                        x: Math.round(Math.random() * w ),
+                        y: Math.round(Math.random() * h/3 + h/3),
+                        t: Math.random() * 2,
+                    })
+                })
+                mousePos = {x: pos[0].x, y:pos[0].y}
+                initialRandomTime = pos.map(e=>e.t).reduce((tot, x)=>(tot+x))
+                updateStat()
+                updatePlot() 
+
+            }
+
+            document.getElementById('canvas').addEventListener('mousemove', (e)=>{    
+                updatePos(e)
+            })
+
+            Array.from(['touchstart', 'touchmove', 'touchend', ])
+                .forEach(evnt=>{
+                    document.getElementById('canvas').addEventListener(evnt, (e)=>{   
+                        e.preventDefault();
+                        var touch = e?.changedTouches[0] 
+                        e.pageX = touch.clientX
+                        e.pageY = touch.clientY                            
+                        updatePos(e)
+                    }, false)
+                }) 
+
+            function updatePos(e) {
+                if (pos.length > 20 && Date.now() - startTime > 3*1000) {
+                    return
+                }
+                let x = e.pageX + ((-.5 + Math.random()) * viewDim.w * .02)
+                let y = e.pageY + ((-.5 + Math.random()) * viewDim.h * .02)
+                let t = (Date.now() / 1000 - pos[pos.length-1].t)  // seconds                    
+                mousePos = {x, y}
+
+                if (Date.now() - last > 15) {
+                    pos.push({x, y, t})
+                    updateStat()
+                    updatePlot() 
+                    last = Date.now()                     
+                }                
+                
+            }
+
+            function distance(a,b) {
+                return Math.sqrt(a*a + b*b)
+            }
+
+            function updatePlot() {
+                let n = pos.length      
+                let posPlotMemory = 50
+                let pos2 = pos.filter((p,i)=>i>n - posPlotMemory)          
+                let x = pos2.map(e=> e.x)
+                let y = pos2.map(e=> viewDim.h - e.y)
+                let tracePoints = {
+                    name: 'points',
+                    type: 'scatter',
+                    x,
+                    y,
+                    mode: 'markers',
+                    marker: {
+                        size: 4,
+                        color:'#777',
+                        opacity: .3,
+                    },
+                    line: {
+                        width:.3,
+                        color: 'red',
+                        opacity: .3,
+                        dash: 'dot',
+                        shape: 'spline',
+                    }
+                }
+                let traceDensity = {
+                        name: 'density',
+                        type: 'histogram2dcontour',                        
+                        x,
+                        y,
+                        ncontours: 15,
+                        colorscale: [
+                            ['0.0', 'rgba(255,255,255,0)'],
+                            ['0.5', 'rgba(250,220,0,.5)'],
+                            ['1.0', 'rgba(200,0,0,.8)'],
+                        ],
+                        showscale: false,
+                        hoverinfo:'skip',
+                        opacity: .5,
+                        line: {
+                            color: '#eee'
+                        },
+                        contours:{
+                            //coloring: 'lines',
+                            showlabels: true,
+                            labelfont: {
+                            },
+                            linedash:'dotted',
+                        }                
+                }    
+
+                let traceMouse = {
+                    name: 'pointer',
+                    type: 'scatter',
+                    x: [mousePos.x],
+                    y: [viewDim.h - mousePos.y],                                    
+                    mode: 'markers',
+                    marker: {
+                        size: 20,
+                        symbol: 'cross-thin',
+                        color: 'rgba(255,255,255,0)',
+                        opacity: .7,
+                        line: {
+                            width:.7,
+                            color: '#aaa',
+                        }
+                    },
+                    hoverinfo:'skip',
+                }                 
+         
+                let data = [tracePoints, traceDensity] 
+
+                let layout = {
+                    height: viewDim.h,
+                    width: viewDim.w,
+                    xaxis: {
+                        showgrid:false,
+                        range: [0, viewDim.w],
+                        zeroline: false,
+                        visible:false,
+                        fixedrange: true,
+                    },
+                    yaxis: {
+                        showgrid:false,
+                        range: [0 , viewDim.h],
+                        zeroline: false,
+                        visible:false,
+                        fixedrange: true,
+                    },    
+                    margin: {
+                        l:0,
+                        r:0,
+                        b:0,
+                        t:0,
+                    },
+                    annotations: [
+                    ],
+                    showlegend: false,                
+                }
+                let config = {
+                    displayModeBar: false,
+                    doubleClick: false,
+                }
+                Plotly.newPlot(div_plot, data, layout, config)                                                                    
+            }
+        
+            function updateStat() {
+                //console.log(pos)
+                document.getElementById('stat-mouseX').innerText = Math.round(mousePos.x)
+                document.getElementById('stat-mouseY').innerText = Math.round(mousePos.y)
+
+                countPoints = pos.length
+                document.getElementById('stat-count').innerText = countPoints + ' points'
+                totalDistance = pos.map((p,i)=>(
+                        i>=1
+                        ? distance(pos[i].x - pos[i-1].x, pos[i].y - pos[i-1].y)
+                        : 0 
+                    ))
+                    .reduce((tot,x)=>(tot+x))
+                document.getElementById('stat-totalDistance').innerText = Math.round(totalDistance) + ' pixels traveled'
+            }
+        </script>
+    </body>
+</html>
