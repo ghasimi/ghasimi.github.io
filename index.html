@@ -116,7 +116,7 @@
                 Array(10).fill(0).map(e=> {
                     pos.push({
                         x: Math.round(Math.random() * w ),
-                        y: Math.round(Math.random() * h/3 + h/3),
+                        y: Math.round(Math.random() * h*1/2 + h/3),
                         t: Math.random() * 2,
                     })
                 })
@@ -194,11 +194,11 @@
                         type: 'histogram2dcontour',                        
                         x,
                         y,
-                        ncontours: 15,
+                        ncontours: 20,
                         colorscale: [
                             ['0.0', 'rgba(255,255,255,0)'],
-                            ['0.5', 'rgba(250,220,0,.5)'],
-                            ['1.0', 'rgba(200,0,0,.8)'],
+                            ['0.5', 'rgba(0,150,220,.5)'],
+                            ['1.0', 'rgba(0,100,200,.8)'],
                         ],
                         showscale: false,
                         hoverinfo:'skip',
