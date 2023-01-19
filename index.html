@@ -182,12 +182,12 @@
         
         <div id="intro">
             <div class="hello"><span>Hello</span></div>
-            <div><span style='font-size: 3em;'>I am </span><span class="name">David</span></div>
-            <div class="headline">Designer and developer of<br>analytics solutions</div>               
+            <div><span style='font-size: 3em;'>I'm </span><span class="name">David</span></div>
+            <div class="headline">Analytics Solutions<br/>Designer and Developer</div>               
         </div>
 
         <div id="tabs">
-            <div class="tab-btn" targetId="tab-1" onclick="this.innerText=''">More...</div>
+            <div class="tab-btn" targetId="tab-1" onclick="this.innerText='Analytics'">More...</div>
             <div class="tab-target" id="tab-1">
                 <p>
                     <sb>Analytics</sb> is "the systematic computational analysis of data or statistics."
@@ -205,9 +205,11 @@
                 <img class="icon" src="icon-linkedin-outline.svg" />
                 <label>LinkedIn</label>
             </a>
-            <a href="#">
+            <a 
+            id="email-link"
+            >
                 <img class="icon" src="icon-email-outline.svg" />
-                <label>email</label>
+                <label id="email">email</label>
             </a>            
         </div>         
 
@@ -447,6 +449,19 @@
                     e.target.classList.add('active')
                     document.getElementById(targetId).classList.add('active')
                 })
+            })
+
+            function showEmail() {
+                document.getElementById('email')
+                    .innerText = 'ghasi' + 'mi.dev' + '@' + 'gma' +'il.c'+ 'om'
+            }
+            Array.from(['click', 'mouseover'])
+                .forEach(evnt=>{                
+                document.getElementById('email-link')
+                    .addEventListener(evnt, (e)=>{
+                        e.preventDefault()
+                        showEmail()  
+                    })
             })
         </script>
     </body>
