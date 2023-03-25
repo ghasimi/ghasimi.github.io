@@ -1,468 +1,468 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>David Ghasimi's Page</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>  
+---
+layout: base
+---
+    <title>David Ghasimi's Page</title>
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>  
 
-        <style>
-            body {
-                font-family: 'Roboto', sans-serif;
-                font-weight: 300;
-                color: rgb(30, 50, 80);
-                margin: 0;
-                padding: 0;
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                align-items: center; 
-            }
+    <style>
+        #content {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: rgb(30, 50, 80);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center; 
+        }
 
-            #canvas {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100vw;
-                height: 100vh;
-                margin:0;
-                padding: 0;
-                background-color: rgba(255, 255, 255, .0);
-                z-index: 10;
-            }
+        #canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            margin:0;
+            padding: 0;
+            background-color: rgba(255, 255, 255, .0);
+            z-index: 10;
+        }
 
-            div.plotly-notifier {
-                visibility: hidden;
-            } 
+        div.plotly-notifier {
+            visibility: hidden;
+        } 
 
-            #intro {
-                position: absolute;
-                top: 0;
-                padding: 10px;
-                margin-top: 50px;   
-                z-index: 5; 
-                max-width: 700px;                 
-            }    
-            
-            #intro .hello {
-                font-size: 5em;
-                font-weight: 900;
-            }
-
-            #intro .name {
-                font-size: 3em;
-                font-weight: 500;
-            }
-
-            #intro .headline {
-                font-size: 1.2em;
-                font-weight: 400;
-            }
-
-            #stat {
-                position: absolute;
-                bottom: 100px;
-                left: 0;
-                text-align: left;
-                padding: 20px;
-                font-size: .9em;
-                background-image: linear-gradient(90deg, white,  rgba(255,255,255,0));
-            }
-
-            #stat label {
-                padding: 0 5px 0 0;
-                opacity: .7;
-            }
-            #stat span {
-                padding: 0 5px 0 0;
-                font-weight: 500;
-                opacity: .9;
-            }
-
-            #connect {
-                position: absolute;
-                left: 0;
-                bottom: 50px;
-                right: 0;
-                margin: 0;
-                padding: 20px;
-                z-index: 20;
-                font-size: 1.0em;
-                font-weight: 400;
-            }
-            #connect img {
-                vertical-align:middle;
-            }
-            #connect label {
-                vertical-align:middle;
-                display: inline-block;
-                padding: 5px;
-            }
-            
-            #connect a, 
-            #connect label,
-            #connect a:visited {
-                cursor: pointer;
-                color: #333;
-                text-decoration: none;
-                transition: all .3s;                
-            }
-
-            #connect label:hover,
-            #connect label:focus {
-                cursor: pointer;
-                color: rgb(140, 0, 255);
-            }
-            
-            .icon {
-                width: 30px;
-                height: 30px;
-            }
-            
-            .d-none {
-                display: none;
-            }
-
-            sb {
-                font-weight: 500;
-            }
-            .reference {
-                opacity: .6;
-            }
-
-            #tabs {
-                position: absolute;
-                top: 300px;
-                margin-left: auto;
-                margin-right: auto;
-                width: 70vw;
-                max-width: 700px;
-                min-width: 370px;
-                z-index: 30;
-            }
-
-            .tab-btn {
-                display: inline-block;
-                padding: 10px;
-                font-weight: 500;
-                cursor: pointer;
-                border-bottom: 1px rgba(255, 255, 255, 0) solid;
-            }
-
-            .tab-btn:hover,
-            .tab-btn.active {
-                color:rgb(140, 0, 255);
-                border-bottom: 1px rgb(140, 0, 255) solid;
-            }
-
-            .tab-target {
-                position: absolute;
-                display: block;
-                clear: both;
-                top: 60px;
-                line-height: 1.4;               
-                visibility: hidden;
-                opacity: 0;
-                transition: all .5s;
-            }
-
-            .tab-target.active {
-                visibility: visible;
-                opacity: 1;
-            }
-
-      </style>    
-    </head>
-    <body>
-        <canvas id="canvas" ></canvas>
-
-        <div  id="plot"></div>
+        #intro {
+            position: absolute;
+            top: 0;
+            padding: 10px;
+            margin-top: 50px;   
+            z-index: 5; 
+            max-width: 700px;                 
+        }    
         
-        <div id="intro">
-            <div class="hello"><span>Hello</span></div>
-            <div><span style='font-size: 3em;'>I'm </span><span class="name">David</span></div>
-            <div class="headline">Analytics Designer &<br/>Developer</div>               
+        #intro .hello {
+            font-size: 5em;
+            font-weight: 900;
+        }
+
+        #intro .name {
+            font-size: 3em;
+            font-weight: 500;
+        }
+
+        #intro .headline {
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+
+        #stat {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            text-align: left;
+            padding: 20px;
+            font-size: .9em;
+            background-image: linear-gradient(90deg, white,  rgba(255,255,255,0));
+        }
+
+        #stat label {
+            padding: 0 5px 0 0;
+            opacity: .7;
+        }
+        #stat span {
+            padding: 0 5px 0 0;
+            font-weight: 500;
+            opacity: .9;
+        }
+
+        #connect {
+            position: absolute;
+            left: 0;
+            bottom: 50px;
+            right: 0;
+            margin: 0;
+            padding: 20px;
+            z-index: 20;
+            font-size: 1.0em;
+            font-weight: 400;
+        }
+        #connect img {
+            vertical-align:middle;
+        }
+        #connect label {
+            vertical-align:middle;
+            display: inline-block;
+            padding: 5px;
+        }
+        
+        #connect a, 
+        #connect label,
+        #connect a:visited {
+            cursor: pointer;
+            color: #333;
+            text-decoration: none;
+            transition: all .3s;                
+        }
+
+        #connect label:hover,
+        #connect label:focus {
+            cursor: pointer;
+            color: rgb(140, 0, 255);
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .d-none {
+            display: none;
+        }
+
+        sb {
+            font-weight: 500;
+        }
+        .reference {
+            opacity: .6;
+        }
+
+        #tabs {
+            position: absolute;
+            top: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70vw;
+            max-width: 700px;
+            min-width: 370px;
+            z-index: 30;
+        }
+
+        .tab-btn {
+            display: inline-block;
+            padding: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 1px rgba(255, 255, 255, 0) solid;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            color:rgb(140, 0, 255);
+            border-bottom: 1px rgb(140, 0, 255) solid;
+        }
+
+        .tab-target {
+            position: absolute;
+            display: block;
+            clear: both;
+            top: 60px;
+            line-height: 1.4;               
+            visibility: hidden;
+            opacity: 0;
+            transition: all .5s;
+        }
+
+        .tab-target.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    </style>  
+
+<div id="content">
+    <canvas id="canvas" ></canvas>
+
+    <div  id="plot"></div>
+    
+    <div id="intro">
+        <div class="hello"><span>Hello</span></div>
+        <div><span style='font-size: 3em;'>I'm </span><span class="name">David</span></div>
+        <div class="headline">Analytics Designer &<br/>Developer</div>               
+    </div>
+
+    <div id="tabs">
+        <div class="tab-btn" targetId="tab-1" onclick="this.innerText='Analytics'">More...</div>
+        <div class="tab-target" id="tab-1">
+            <p>
+                <sb>Analytics</sb> is "the systematic computational analysis of data or statistics."
+                    <span class="reference">~Oxford, via Wikipedia</span>
+            </p>
+            <p>
+                To me, an <sb>analytics solution</sb> could be as simple as a distance matrix printed at the bottom of a map - that is indeed one of the first experiences with data that I recall from my childhood - or as sophisticated as a real-time system for detection and monitroing of signals and/or prediction of target variables. 
+            </p>
         </div>
 
-        <div id="tabs">
-            <div class="tab-btn" targetId="tab-1" onclick="this.innerText='Analytics'">More...</div>
-            <div class="tab-target" id="tab-1">
-                <p>
-                    <sb>Analytics</sb> is "the systematic computational analysis of data or statistics."
-                        <span class="reference">~Oxford, via Wikipedia</span>
-                </p>
-                <p>
-                    To me, an <sb>analytics solution</sb> could be as simple as a distance matrix printed at the bottom of a map - that is indeed one of the first experiences with data that I recall from my childhood - or as sophisticated as a real-time system for detection and monitroing of signals and/or prediction of target variables. 
-                </p>
-            </div>
+    </div>  
 
-        </div>  
-
-        <div id="connect">
-            <a href="https://www.linkedin.com/in/dgconnect/">
-                <img class="icon" src="icon-linkedin-outline.svg" />
-                <label>LinkedIn</label>
-            </a>
-            <a 
-            id="email-link"
-            >
-                <img class="icon" src="icon-email-outline.svg" />
-                <label id="email">email</label>
-            </a>            
-        </div>         
+    <div id="connect">
+        <a href="https://www.linkedin.com/in/dgconnect/">
+            <img class="icon" src="icon-linkedin-outline.svg" />
+            <label>LinkedIn</label>
+        </a>
+        <a 
+        id="email-link"
+        >
+            <img class="icon" src="icon-email-outline.svg" />
+            <label id="email">email</label>
+        </a>            
+    </div>         
 
 
 
-        <div id="stat">                                
-            <div><label>X</label><span id="stat-mouseX"></span></div>    
-            <div><label>Y</label><span id="stat-mouseY"></span></div>    
-            <div><label>Records</label><span id="stat-count"></span></div>
-            <div class="d-none"><label>Time</label><span id="stat-totalTime"></span></div>
-            <div><label>Pixels traveled</label><span id="stat-totalDistance"></span></div>
-        </div>           
+    <div id="stat">                                
+        <div><label>X</label><span id="stat-mouseX"></span></div>    
+        <div><label>Y</label><span id="stat-mouseY"></span></div>    
+        <div><label>Records</label><span id="stat-count"></span></div>
+        <div class="d-none"><label>Time</label><span id="stat-totalTime"></span></div>
+        <div><label>Pixels traveled</label><span id="stat-totalDistance"></span></div>
+    </div>           
 
 
-        <script>
-            let mousePos = {}
-            let pos = []
-            let data = []
-            let viewDim = {} 
-            let viewMatrix = []
-            let startTime = Date.now()
-            let totalTime = 0
-            let totalDistance = 0
-            let countPoints = 0
-            let last = Date.now()
-            let initialRandomTime = 0
-            let div_plot = document.getElementById('plot')
+    <script>
+        let mousePos = {}
+        let pos = []
+        let data = []
+        let viewDim = {} 
+        let viewMatrix = []
+        let startTime = Date.now()
+        let totalTime = 0
+        let totalDistance = 0
+        let countPoints = 0
+        let last = Date.now()
+        let initialRandomTime = 0
+        let div_plot = document.getElementById('plot')
 
+        updateViewDim()
+
+        window.addEventListener('resize', e=>{
             updateViewDim()
+        })
+        
+        function updateViewDim() {
+            let w = Math.min(screen.width, window.innerWidth)
+            let h = Math.min(screen.height, window.innerHeight)
+            viewDim = {w, h}
 
-            window.addEventListener('resize', e=>{
-                updateViewDim()
-            })
-            
-            function updateViewDim() {
-                let w = Math.min(screen.width, window.innerWidth)
-                let h = Math.min(screen.height, window.innerHeight)
-                viewDim = {w, h}
-
-                Array(70).fill(0).map(e=> {
-                    pos.push({
-                        x: Math.round(Math.random() * w*1/3 + w*1/2 ),
-                        y: Math.round(Math.random() * h*1/3 + h*1/2),
-                        t: Math.random() * 2,
-                    })
+            Array(70).fill(0).map(e=> {
+                pos.push({
+                    x: Math.round(Math.random() * w*1/3 + w*1/2 ),
+                    y: Math.round(Math.random() * h*1/3 + h*1/2),
+                    t: Math.random() * 2,
                 })
-                mousePos = {x: pos[0].x, y:pos[0].y}
-                initialRandomTime = pos.map(e=>e.t).reduce((tot, x)=>(tot+x))
+            })
+            mousePos = {x: pos[0].x, y:pos[0].y}
+            initialRandomTime = pos.map(e=>e.t).reduce((tot, x)=>(tot+x))
+            updateStat()
+            updatePlot() 
+
+        }
+
+        document.getElementById('canvas').addEventListener('mousemove', (e)=>{    
+            updatePos(e)
+        })
+
+        Array.from(['touchstart', 'touchmove', 'touchend', ])
+            .forEach(evnt=>{
+                document.getElementById('canvas').addEventListener(evnt, (e)=>{   
+                    e.preventDefault();
+                    var touch = e?.changedTouches[0] 
+                    e.pageX = touch.clientX
+                    e.pageY = touch.clientY                            
+                    updatePos(e)
+                }, false)
+            }) 
+
+        function updatePos(e) {
+            if (pos.length > 20 && Date.now() - startTime > 3*1000) {
+                //return
+            }
+            let x = e.pageX + ((-.5 + Math.random()) * viewDim.w * .02)
+            let y = e.pageY + ((-.5 + Math.random()) * viewDim.h * .02)
+            let t = (Date.now() / 1000 - pos[pos.length-1].t)  // seconds                    
+            mousePos = {x, y}
+
+            if (Date.now() - last > 15) {
+                pos.push({x, y, t})
                 updateStat()
                 updatePlot() 
+                last = Date.now()                     
+            }                
+            
+        }
 
-            }
+        function distance(a,b) {
+            return Math.sqrt(a*a + b*b)
+        }
 
-            document.getElementById('canvas').addEventListener('mousemove', (e)=>{    
-                updatePos(e)
-            })
+        function updatePlot() {
+            let n = pos.length      
+            let posPlotMemory = n
+            let pos2 = pos.filter((p,i)=>i>n - posPlotMemory)          
+            let x = pos2.map(e=> e.x)
+            let y = pos2.map(e=> viewDim.h - e.y)
 
-            Array.from(['touchstart', 'touchmove', 'touchend', ])
-                .forEach(evnt=>{
-                    document.getElementById('canvas').addEventListener(evnt, (e)=>{   
-                        e.preventDefault();
-                        var touch = e?.changedTouches[0] 
-                        e.pageX = touch.clientX
-                        e.pageY = touch.clientY                            
-                        updatePos(e)
-                    }, false)
-                }) 
-
-            function updatePos(e) {
-                if (pos.length > 20 && Date.now() - startTime > 3*1000) {
-                    //return
+            let tracePoints = {
+                name: 'points',
+                type: 'scatter',
+                x,
+                y,
+                mode: 'markers+lines',
+                marker: {
+                    size: 10,
+                    color:'rgba(255,255,255,.5)',
+                    opacity: .6,
+                    line: {
+                        color: '#999',
+                        width:0,
+                    }
+                },
+                line: {
+                    width:0,
+                    color: '#eee',
+                    opacity: 0,
+                    dash: 'solid',
+                    shape: 'vhv',
                 }
-                let x = e.pageX + ((-.5 + Math.random()) * viewDim.w * .02)
-                let y = e.pageY + ((-.5 + Math.random()) * viewDim.h * .02)
-                let t = (Date.now() / 1000 - pos[pos.length-1].t)  // seconds                    
-                mousePos = {x, y}
-
-                if (Date.now() - last > 15) {
-                    pos.push({x, y, t})
-                    updateStat()
-                    updatePlot() 
-                    last = Date.now()                     
-                }                
-                
             }
 
-            function distance(a,b) {
-                return Math.sqrt(a*a + b*b)
-            }
-
-            function updatePlot() {
-                let n = pos.length      
-                let posPlotMemory = n
-                let pos2 = pos.filter((p,i)=>i>n - posPlotMemory)          
-                let x = pos2.map(e=> e.x)
-                let y = pos2.map(e=> viewDim.h - e.y)
-
-                let tracePoints = {
-                    name: 'points',
-                    type: 'scatter',
+            let traceDensity = {
+                    name: 'density',
+                    type: 'histogram2dcontour',                        
                     x,
                     y,
-                    mode: 'markers+lines',
-                    marker: {
-                        size: 10,
-                        color:'rgba(255,255,255,.5)',
-                        opacity: .6,
-                        line: {
-                            color: '#999',
-                            width:0,
-                        }
-                    },
-                    line: {
-                        width:0,
-                        color: '#eee',
-                        opacity: 0,
-                        dash: 'solid',
-                        shape: 'vhv',
-                    }
-                }
-
-                let traceDensity = {
-                        name: 'density',
-                        type: 'histogram2dcontour',                        
-                        x,
-                        y,
-                        ncontours: 20,
-                        colorscale: [
-                            ['0.0', 'rgba(255,255,255,0)'],
-                            ['0.5', 'rgba(0,150,220,.5)'],
-                            ['1.0', 'rgba(0,100,200,.8)'],
-                        ],
-                        showscale: false,
-                        hoverinfo:'skip',
-                        opacity: .5,
-                        line: {
-                            color: '#eee'
-                        },
-                        contours:{
-                            //coloring: 'lines',
-                            showlabels: true,
-                            labelfont: {
-                            },
-                            linedash:'dotted',
-                        }                
-                }    
-
-                let traceMouse = {
-                    name: 'pointer',
-                    type: 'scatter',
-                    x: [mousePos.x],
-                    y: [viewDim.h - mousePos.y],                                    
-                    mode: 'markers',
-                    marker: {
-                        size: 20,
-                        symbol: 'cross-thin',
-                        color: 'rgba(255,255,255,0)',
-                        opacity: .7,
-                        line: {
-                            width:.7,
-                            color: '#aaa',
-                        }
-                    },
-                    hoverinfo:'skip',
-                }                 
-         
-                let data = [tracePoints, traceDensity] 
-
-                let layout = {
-                    height: viewDim.h,
-                    width: viewDim.w,
-                    xaxis: {
-                        showgrid:false,
-                        range: [0, viewDim.w],
-                        zeroline: false,
-                        visible:false,
-                        fixedrange: true,
-                        position: .1,
-                        tickfont: {
-                            //color:'rgb(0,150,220)',
-                            size: 10,
-                        },                          
-                    },
-                    yaxis: {
-                        showgrid:false,
-                        range: [0 , viewDim.h],
-                        zeroline: {ax: 100,},
-                        visible:false,
-                        fixedrange: true,                                              
-                    },    
-                    margin: {
-                        l:0,
-                        r:0,
-                        b:0,
-                        t:0,
-                    },
-                    annotations: [
+                    ncontours: 20,
+                    colorscale: [
+                        ['0.0', 'rgba(255,255,255,0)'],
+                        ['0.5', 'rgba(0,150,220,.5)'],
+                        ['1.0', 'rgba(0,100,200,.8)'],
                     ],
-                    showlegend: false,                
-                }
-                let config = {
-                    displayModeBar: false,
-                    doubleClick: false,
-                }
-                Plotly.newPlot(div_plot, data, layout, config)                                                                    
-            }
+                    showscale: false,
+                    hoverinfo:'skip',
+                    opacity: .5,
+                    line: {
+                        color: '#eee'
+                    },
+                    contours:{
+                        //coloring: 'lines',
+                        showlabels: true,
+                        labelfont: {
+                        },
+                        linedash:'dotted',
+                    }                
+            }    
+
+            let traceMouse = {
+                name: 'pointer',
+                type: 'scatter',
+                x: [mousePos.x],
+                y: [viewDim.h - mousePos.y],                                    
+                mode: 'markers',
+                marker: {
+                    size: 20,
+                    symbol: 'cross-thin',
+                    color: 'rgba(255,255,255,0)',
+                    opacity: .7,
+                    line: {
+                        width:.7,
+                        color: '#aaa',
+                    }
+                },
+                hoverinfo:'skip',
+            }                 
         
-            function updateStat() {
-                //console.log(pos)
-                document.getElementById('stat-mouseX').innerText = Math.round(mousePos.x)
-                document.getElementById('stat-mouseY').innerText = Math.round(mousePos.y)
+            let data = [tracePoints, traceDensity] 
 
-                countPoints = pos.length
-                document.getElementById('stat-count').innerText = countPoints
-                totalDistance = pos.map((p,i)=>(
-                        i>=1
-                        ? distance(pos[i].x - pos[i-1].x, pos[i].y - pos[i-1].y)
-                        : 0 
-                    ))
-                    .reduce((tot,x)=>(tot+x))
-                document.getElementById('stat-totalDistance').innerText = Math.round(totalDistance)
+            let layout = {
+                height: viewDim.h,
+                width: viewDim.w,
+                xaxis: {
+                    showgrid:false,
+                    range: [0, viewDim.w],
+                    zeroline: false,
+                    visible:false,
+                    fixedrange: true,
+                    position: .1,
+                    tickfont: {
+                        //color:'rgb(0,150,220)',
+                        size: 10,
+                    },                          
+                },
+                yaxis: {
+                    showgrid:false,
+                    range: [0 , viewDim.h],
+                    zeroline: {ax: 100,},
+                    visible:false,
+                    fixedrange: true,                                              
+                },    
+                margin: {
+                    l:0,
+                    r:0,
+                    b:0,
+                    t:0,
+                },
+                annotations: [
+                ],
+                showlegend: false,                
             }
-
-            function removeClass(elm, className) {
-                    elm.classList.remove(className)
+            let config = {
+                displayModeBar: false,
+                doubleClick: false,
             }
+            Plotly.newPlot(div_plot, data, layout, config)                                                                    
+        }
+    
+        function updateStat() {
+            //console.log(pos)
+            document.getElementById('stat-mouseX').innerText = Math.round(mousePos.x)
+            document.getElementById('stat-mouseY').innerText = Math.round(mousePos.y)
 
-            function addClass(elm, className) {
-                    elm.classList.add(className)
-            }
+            countPoints = pos.length
+            document.getElementById('stat-count').innerText = countPoints
+            totalDistance = pos.map((p,i)=>(
+                    i>=1
+                    ? distance(pos[i].x - pos[i-1].x, pos[i].y - pos[i-1].y)
+                    : 0 
+                ))
+                .reduce((tot,x)=>(tot+x))
+            document.getElementById('stat-totalDistance').innerText = Math.round(totalDistance)
+        }
 
-            Array.from(document.getElementsByClassName('tab-btn')).map(btn=>{
-                btn.addEventListener('click', (e)=>{
-                    Array.from(document.getElementsByClassName('tab-btn')).map(btn=>{removeClass(btn, 'active')})
-                    Array.from(document.getElementsByClassName('tab-target')).map(btn=>{removeClass(btn, 'active')})
-                    const targetId = e.target.attributes?.targetId?.value
-                    e.target.classList.add('active')
-                    document.getElementById(targetId).classList.add('active')
+        function removeClass(elm, className) {
+                elm.classList.remove(className)
+        }
+
+        function addClass(elm, className) {
+                elm.classList.add(className)
+        }
+
+        Array.from(document.getElementsByClassName('tab-btn')).map(btn=>{
+            btn.addEventListener('click', (e)=>{
+                Array.from(document.getElementsByClassName('tab-btn')).map(btn=>{removeClass(btn, 'active')})
+                Array.from(document.getElementsByClassName('tab-target')).map(btn=>{removeClass(btn, 'active')})
+                const targetId = e.target.attributes?.targetId?.value
+                e.target.classList.add('active')
+                document.getElementById(targetId).classList.add('active')
+            })
+        })
+
+        function showEmail() {
+            document.getElementById('email')
+                .innerText = 'ghasi' + 'mi.dev' + '@' + 'gma' +'il.c'+ 'om'
+        }
+        Array.from(['click', 'mouseover'])
+            .forEach(evnt=>{                
+            document.getElementById('email-link')
+                .addEventListener(evnt, (e)=>{
+                    e.preventDefault()
+                    showEmail()  
                 })
-            })
-
-            function showEmail() {
-                document.getElementById('email')
-                    .innerText = 'ghasi' + 'mi.dev' + '@' + 'gma' +'il.c'+ 'om'
-            }
-            Array.from(['click', 'mouseover'])
-                .forEach(evnt=>{                
-                document.getElementById('email-link')
-                    .addEventListener(evnt, (e)=>{
-                        e.preventDefault()
-                        showEmail()  
-                    })
-            })
-        </script>
-    </body>
-</html>
+        })
+    </script>
+</div>
