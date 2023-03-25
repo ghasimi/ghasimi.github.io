@@ -18,9 +18,21 @@
         position: relative;
         z-index: 10;
       }
+      nav a {
+        color: rgb(30, 50, 80);
+        text-decoration: none;
+        border-bottom: 5px solid rgba(255,255,255,0);
+        font-weight: 500;
+        font-size: 1.1em;
+        margin: auto 5px;
+      }
+      nav a.current {
+        border-color: rgb(50, 168, 237);
+      }
     </style>    
   </head>
   <body>
+    {% include navigation.html %}
     {{ content }}
   </body>
 </html>
