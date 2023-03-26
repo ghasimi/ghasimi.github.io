@@ -14,17 +14,28 @@
           margin: 0;
           padding: 10px;
       }
+      a,
+      a:visited {
+        color:  rgb(0, 131, 207);
+        text-decoration: none;        
+      }
+      a:hover {
+        text-decoration:underline;
+      }
       nav {
         position: relative;
         z-index: 10;
       }
       nav a {
-        color: rgb(30, 50, 80);
-        text-decoration: none;
+        color: rgb(30, 50, 80) !important;
+        text-decoration: none  !important;
         border-bottom: 5px solid rgba(255,255,255,0);
         font-weight: 500;
         font-size: 1.1em;
         margin: auto 5px;
+      }
+      #page-title {
+        margin: 30px auto;
       }
       nav a.current {
         border-color: rgb(50, 168, 237);
@@ -33,6 +44,7 @@
   </head>
   <body>
     {% include navigation.html %}
+    {% if page.title %}<h1 id="page-title">{{ page.title}}</h1>{% endif %}
     {{ content }}
   </body>
 </html>
