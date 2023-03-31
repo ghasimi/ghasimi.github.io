@@ -49,6 +49,42 @@
         opacity: .6;
         transition: all .2s;
       }
+
+      #connect {
+          margin: 10px auto; 
+          font-size: 1.0em;
+          font-weight: 400;
+      }
+      #connect img {
+          vertical-align:middle;
+      }
+      #connect label {
+          vertical-align:middle;
+          display: inline-block;
+          padding: 5px;
+      }
+
+      #connect a, 
+      #connect label,
+      #connect a:visited {
+          display: inline-block;
+          padding-right: 5px;
+          margin-right: 5px;
+          cursor: pointer;
+          color: #333;
+          text-decoration: none;
+          transition: all .3s;                
+      }
+
+      #connect label:hover,
+      #connect label:focus {
+          cursor: pointer;
+          color: rgb(140, 0, 255);
+      }      
+      .icon {
+          width: 30px;
+          height: 30px;
+      }      
     </style>    
   </head>
   <body>
@@ -56,6 +92,17 @@
     {% if page.title %}<h1 id="page-title">{{ page.title}}</h1>{% endif %}
     {{ content }}
     <div id = "footnote" >
+        <div id="connect">
+          <a href="mailto:ghasimi.dev@gmail.com">
+            <img class="icon" src="icon-email.svg"/>
+          </a>
+          <a href="https://www.linkedin.com/in/dgconnect/">
+            <img class="icon" src="icon-linkedin.svg" />
+          </a>                                    
+          <a href="https://www.github.com/ghasimi">
+            <img class="icon" src="icon-github.svg"/>
+          </a>         
+        </div>
         This is a personal page.<br/> 
         Contents do not reflect the opinions of former or current employer.
     </div>
