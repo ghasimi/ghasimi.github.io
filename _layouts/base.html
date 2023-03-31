@@ -40,11 +40,25 @@
       nav a.current {
         border-color: rgb(50, 168, 237);
       }
+      #footnote {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 10px;
+        font-size: .8em;
+        opacity: .6;
+        transition: all .2s;
+      }
     </style>    
   </head>
   <body>
     {% include navigation.html %}
     {% if page.title %}<h1 id="page-title">{{ page.title}}</h1>{% endif %}
     {{ content }}
+    <div id = "footnote" >
+        This is a personal page.<br/> 
+        Contents do not reflect the opinions of former or current employer.
+    </div>
+
   </body>
 </html>
