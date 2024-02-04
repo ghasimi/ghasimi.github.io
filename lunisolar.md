@@ -3,8 +3,7 @@ title: Lunisolar
 layout: text
 ---
 
-Position of the earth and moon vs sun.
-
+<link rel="stylesheet" href="lunisolar.css">
 <div>
     <label>Year</label>
     <input id="input-year" type="range" min="2000" max="2030" value="2024" />
