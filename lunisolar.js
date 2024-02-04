@@ -56,7 +56,7 @@ function clear() {
 
 function updateInfo() {
     uiYear.innerText =  inYear.value
-    uiDay.innerText =  inDay.value
+    uiDay.innerText =  inDay.valueAsNumber + 1
 }        
 
 function updateSun() {

@@ -12,7 +12,7 @@ Position of the earth and moon vs sun.
     <br/>
 
     <label>Day</label>
-    <input id="input-day" type="range" min="1" max="365" value="39" />
+    <input id="input-day" type="range" min="0" max="365" value="39" />
     <span id="ui-day"></span>
     <br>
     <canvas id="canvas-main">
