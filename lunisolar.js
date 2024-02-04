@@ -26,11 +26,11 @@ let sr = 30
 
 let ex, ey
 let er = sr / 2
-let ed = ( H / 5 )    
+let ed = ( H / 4 )    
 
 let mx, my
 let mr = er / 2
-let md = er * 2   
+let md = er * 2.5   
         
 function applyTime() {
     clear()
@@ -38,6 +38,7 @@ function applyTime() {
     updateEarth()
     updateMoon()
     updateSun()
+    addOrbits()
 }
 
 function day() {
@@ -66,13 +67,26 @@ function updateSun() {
     ctx.fill()            
 }
 
+function addOrbits() {
+    function orbit(x, y, d) {
+        ctx.beginPath()
+        ctx.arc(x, y, d, 0, rad(360) )
+        ctx.strokeStyle = "grey"
+        ctx.lineWidth = 1
+        ctx.setLineDash([2,6])
+        ctx.stroke()    
+    }
+    orbit(sx, sy, ed )
+    orbit(ex, ey, md )
+}
+
 function updateEarth() {
 
     let degree_per_day = 1 / days_per_year * 360
-    let a = - day() * degree_per_day  - 45
+    let a = - day() * degree_per_day
 
-    ex = sx +  ed * Math.cos(rad(a)) - ed * Math.sin(rad(a))
-    ey = sy +  ed * Math.sin(rad(a)) + ed * Math.cos(rad(a))
+    ex = sx +  ed * Math.cos(rad(a)) 
+    ey = sy +  ed * Math.sin(rad(a)) 
 
     ctx.beginPath()
     ctx.fillStyle = "LightSkyBlue"
@@ -87,11 +101,11 @@ function updateEarth() {
 function updateMoon() {
 
     let degree_per_day = 1 / 27.321661 * 360
-    let a = - day() * degree_per_day  - 45 - 180 // if it was a new moon
+    let a = - day() * degree_per_day - 180 // if it was a new moon
         - 10 * degree_per_day // Dec 22, 2023 was 10 days after the actual new moon
 
-    mx = ex +  md * Math.cos(rad(a)) - md * Math.sin(rad(a))
-    my = ey +  md * Math.sin(rad(a)) + md * Math.cos(rad(a))
+    mx = ex +  md * Math.cos(rad(a)) 
+    my = ey +  md * Math.sin(rad(a))
 
     ctx.beginPath()
     ctx.fillStyle = "lightGray"
