@@ -1,4 +1,4 @@
-const W = 300
+const W = 350
 const H = W    
 const days_per_year =  365.242374   
 
@@ -22,23 +22,24 @@ document.getElementById("input-day")
 
 let sx = W / 2
 let sy = H / 2  
-let sr = 30
+let sr = 20
 
 let ex, ey
 let er = sr / 2
-let ed = ( H / 3 )    
+let ed = ( H / 4.5 )    
 
 let mx, my
-let mr = er / 2
+let mr = er / 1.5
 let md = er * 2.5   
         
 function applyTime() {
     clear()
     updateInfo()
+    updateSun()
     updateEarth()
     updateMoon()
-    updateSun()
     addOrbits()
+    addSeasons()
 }
 
 function day() {
@@ -80,6 +81,40 @@ function addOrbits() {
     orbit(ex, ey, md )
 }
 
+function addSeasons() {    
+    
+    function season(q, txt, txt2) {
+        txt2 = txt2 || ''
+        let d = 40
+        let x1 = sx + ed * Math.sin(rad(q / 4 * 360))
+        let y1 = sy + ed * Math.cos(rad(q / 4 * 360))
+        let x2 = sx + (ed + d) * Math.sin(rad(q / 4 * 360))
+        let y2 = sy + (ed + d) * Math.cos(rad(q / 4 * 360))
+        let x3 = sx + (ed + 1.5 * d) * Math.sin(rad(q / 4 * 360))
+        let y3 = sy + (ed + 1.5 * d) * Math.cos(rad(q / 4 * 360))
+
+        ctx.beginPath()
+        ctx.moveTo(x1, y1 )
+        ctx.lineTo(x2, y2)
+        ctx.strokeStyle = "grey"
+        ctx.lineWidth = 1
+        ctx.setLineDash([2, 6])
+        ctx.stroke()   
+
+        ctx.font = 'lighter 11px monospace';
+        ctx.textAlign = "center";
+        ctx.fillStyle = 'grey'
+        ctx.fillText(txt, x3, y3);        
+        ctx.fillText(txt2, x3, y3 + 15);        
+    }
+    season(1, 'Dec', 'Solstice')
+    season(2, 'Mar', 'Equinox')
+    season(3, 'Jun', 'Solstice')
+    season(4, 'Sep', 'Equinox')
+
+
+}
+
 function updateEarth() {
 
     let degree_per_day = 1 / days_per_year * 360
@@ -108,7 +143,7 @@ function updateMoon() {
     my = ey +  md * Math.sin(rad(a))
 
     ctx.beginPath()
-    ctx.fillStyle = "lightGray"
+    ctx.fillStyle = "lightcoral"
     ctx.strokeStyle = ctx.fillStyle 
     ctx.setLineDash([])
     ctx.arc(mx, my, mr, 0, rad(360) )  
