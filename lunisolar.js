@@ -1,5 +1,5 @@
-const W = 400
-const H = 400    
+const W = 300
+const H = W    
 const days_per_year =  365.242374   
 
 const uiDay = document.getElementById("ui-day")
@@ -26,7 +26,7 @@ let sr = 30
 
 let ex, ey
 let er = sr / 2
-let ed = ( H / 4 )    
+let ed = ( H / 3 )    
 
 let mx, my
 let mr = er / 2
