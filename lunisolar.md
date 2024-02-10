@@ -7,18 +7,21 @@ That question led me to learn that the Lunar New Year is in fact [lunisolar](htt
 
 <link rel="stylesheet" href="lunisolar.css">
 <div>
-    <label>Year</label>
-    <input id="input-year" type="range" min="2000" max="2030" value="2024" />
-    <span id="ui-year"></span>
-    <br/>
+    <canvas id="canvas-main" style='display: block; margin: 0 auto;'></canvas>
 
-    <label>Day</label>
-    <input id="input-day" type="range" min="0" max="365" value="39" />
-    <span id="ui-day"></span>
-    <br>
-    <canvas id="canvas-main">
-
-    </canvas>
+    <div style='display:flex; flex-direction: column'>
+        <div style='margin: 0 auto'>
+            <label>Year</label>
+            <input id="input-year" type="range" min="2000" max="2050" value="2024" />
+            <span id="ui-year"></span>
+        </div>
+        <div style='margin: 0 auto'>
+            <label>Day</label>
+            <input id="input-day" type="range" min="0" max="365" value="39" />
+            <span id="ui-day"></span>        
+        </div>
+    </div>
+ 
 
     <script src='lunisolar.js'></script>
     <script>

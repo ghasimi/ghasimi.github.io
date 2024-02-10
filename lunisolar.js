@@ -30,7 +30,7 @@ let ed = ( H / 4.5 )
 
 let mx, my
 let mr = er / 1.5
-let md = er * 2.5   
+let md = er * 3   
         
 function applyTime() {
     clear()
