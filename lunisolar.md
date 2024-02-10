@@ -47,6 +47,6 @@ For example, after one day, the earth has moved by 1 / 365.242374 * 360 degree a
 
 ### Calibration 
 
-To make it more intuitive, I adjusted the starting angles so that on Dec 22 (day 356th of 2023) the earth is at 3 o' clock and the moon is 10 days before the New Moon. Looks complicated but it is simply about adding a constant of -10 * 1 / 27.321661 degree to the moon's equations, i.e. Easier done than said!    
+To make it more intuitive, I adjusted the starting angles so that on Dec 22 (day 356th of 2023) the earth is at 3 o' clock and the moon is 10 days before the New Moon. Looks complicated but it is simply about adding a constant of -10 * 1 / 27.321661 * 360 degree to the moon's equations, i.e. Easier done than said!    
 
 <br>
