@@ -1,9 +1,9 @@
 ---
-title: Why is the Lunar New Year only in winter?
+title: Why is the "Lunar" New Year only in Jan and Feb?
 layout: text
 ---
 
-That question led me to learn that the Lunar New Year is in fact [lunisolar](https://en.wikipedia.org/wiki/Lunisolar_calendar), where the new year starts on the 2nd [New Moon](https://en.wikipedia.org/wiki/Lunar_phase) after the [December solstice](https://en.wikipedia.org/wiki/December_solstice) (~ Dec 21). The solar part defines the "seasons", which was important for the farmers. I created this interactive model to better understand the dynamic of this system.
+That question led me to learn that the [Lunar New Year](https://en.wikipedia.org/wiki/Lunar_New_Year) is not a pure lunar year but [lunisolar](https://en.wikipedia.org/wiki/Lunisolar_calendar), where the new year starts on the 2nd [New Moon](https://en.wikipedia.org/wiki/Lunar_phase) after the [December solstice](https://en.wikipedia.org/wiki/December_solstice) (~ Dec 21). The solar part defines the "seasons", which was important for the farmers. I created this interactive model to better understand the dynamic of this system.
 
 <link rel="stylesheet" href="lunisolar.css">
 <div>
