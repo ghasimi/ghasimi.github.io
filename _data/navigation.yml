@@ -1,6 +1,6 @@
-- name: Home
+- name: DG
   link: /     
-- name: Intro
-  link: /intro.html
+- name: Analytics
+  link: /analytics.html
 - name: Lunisolar
   link: /lunisolar.html
