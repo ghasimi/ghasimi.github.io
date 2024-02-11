@@ -1,5 +1,5 @@
 const W = 350
-const H = W    
+const H = 300    
 const days_per_year =  365.242374   
 
 const uiDay = document.getElementById("ui-day")
@@ -19,6 +19,7 @@ const inDay = document.getElementById("input-day")
 document.getElementById("input-day")
     .addEventListener("input", applyTime)
 
+const img = document.getElementById('moon-phase-image')
 
 let sx = W / 2
 let sy = H / 2  
@@ -30,7 +31,8 @@ let ed = ( H / 4.5 )
 
 let mx, my
 let mr = er / 1.5
-let md = er * 3   
+let md = er * 3  
+let m_degree  
         
 function applyTime() {
     clear()
@@ -40,6 +42,7 @@ function applyTime() {
     updateMoon()
     addOrbits()
     addSeasons()
+    updateMoonPhase()
 }
 
 function day() {
@@ -136,11 +139,12 @@ function updateEarth() {
 function updateMoon() {
 
     let degree_per_day = 1 / 27.321661 * 360
-    let a = - day() * degree_per_day - 180 // if it was a new moon
+    m_degree = (- day() * degree_per_day - 180 // if it was a new moon
         - 10 * degree_per_day // Dec 22, 2023 was 10 days after the actual new moon
+        ) % 360 
 
-    mx = ex +  md * Math.cos(rad(a)) 
-    my = ey +  md * Math.sin(rad(a))
+    mx = ex +  md * Math.cos(rad(m_degree)) 
+    my = ey +  md * Math.sin(rad(m_degree))
 
     ctx.beginPath()
     ctx.fillStyle = "lightcoral"
@@ -151,3 +155,34 @@ function updateMoon() {
     ctx.fill()
 }
 
+function updateMoonPhase() {
+
+    function vectorAngle(x, y) {        
+        let a = (- Math.atan2(x, y) * 180 / Math.PI + 90) % 360
+        a = a >= 0 ? a : 360 + a
+        return a
+    }
+
+    const [x1, y1] = [sx - ex, ey - sy]
+    const [x2, y2] = [mx - ex, ey - my]    
+    const sun_earth_angle = vectorAngle(x1, y1)
+    const moon_earth_angle = vectorAngle(x2, y2) 
+    let moon_earth_sun_angle = moon_earth_angle - sun_earth_angle
+    
+    moon_earth_sun_angle = (moon_earth_sun_angle + 2 * 360 + 22.5) % 360
+
+    const m_phase = Math.floor(moon_earth_sun_angle / 46)
+    img.src = './assets/lunisolar/moon_' + m_phase + '.svg'
+
+    const moon_phases = {
+        0: 'New Moon',
+        1: 'Waxing Crescent',
+        2: 'First Quarter',
+        3: 'Waxing Gibbous',
+        4: 'Full Moon',
+        5: 'Waning Gibbous',
+        6: 'Last Quarter',
+        7: 'Waning Crescent',
+    }
+    document.getElementById('moon-phase-text').innerText = moon_phases[m_phase] || '-'
+}
