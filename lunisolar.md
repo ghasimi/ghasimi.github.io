@@ -56,4 +56,20 @@ For example, after one day, the earth has moved by 1 / 365.242374 * 360 degree a
 
 To make it more intuitive, I adjusted the starting angles so that on Dec 22 (day 356th of 2023) the earth is at 3 o' clock and the moon is 10 days before the New Moon. Looks complicated but it is simply about adding a constant of -10 * 1 / 27.321661 * 360 degree to the moon's equations, i.e. Easier done than said!    
 
+## The Seventeen-Arch Bridge
+
+<image 
+    src='./assets/lunisolar/seventeen-arch-bridge-google-earth.png' width='70%' 
+    title='Seventeen-Arch Bridge, Beijing, China. Source: Google Earth.'
+ />
+<sub>Image: The Seventeen-Arch Bridge, Beijing, China. Source: Google Earth.</sub>
+
+Architecture has always been an ideal place to find fascinating combinations of science, art and function. The [Seventeen-Arch Bridge](https://www.google.com/maps/place/%E5%8D%81%E4%B8%83%E5%AD%94%E6%A1%A5/@39.9910076,116.2765402,17.36z/data=!4m15!1m8!3m7!1s0x35f05296e7142cb9:0xb9625620af0fa98a!2sBeijing,+China!3b1!8m2!3d39.904211!4d116.407395!16zL20vMDE5MTQ!3m5!1s0x35f05129c2e21c89:0x1fe46d685c297612!8m2!3d39.990113!4d116.278486!16s%2Fg%2F1tgnzzcn!5m2!1e2!1e4?entry=ttu) in Beijing, China, is definitely one of them that I "discovered"! 
+
+Built in the 18th century, the bridge was designed so that on the December solstice, the sun's rays would be perpendicular to the bridge and beautifully illuminate the side walls of the seventeen arches.
+
+<br>
+
+Disclaimer: This is obviously a fun work, without warranties or conditions of any kind.
+
 <br>
